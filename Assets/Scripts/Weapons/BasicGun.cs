@@ -22,7 +22,7 @@ public class BasicGun : BaseWeapon
         if (timer >= weaponSpeed)
         {
             GameObject projectiles = Instantiate(projectile, transform.position, Quaternion.identity);
-            projectile.GetComponent<BasicGunProjectile>().SetDirection(Vector2.Angle(transform.position, GameManager.instance.LookDirection));
+            projectile.GetComponent<BasicGunProjectile>().SetDirection(GameManager.instance.LookDirection);
             timer = 0.0f;
         }
     }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BasicGunProjectile : MonoBehaviour
 {
-    private float direction;
+    private Vector2 direction;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] Rigidbody2D rb;
 
     private void Start()
     {
@@ -16,7 +18,12 @@ public class BasicGunProjectile : MonoBehaviour
         
     }
 
-    public void SetDirection(float direction)
+    private void FixedUpdate()
+    {
+        rb.velocity = direction * bulletSpeed;
+    }
+
+    public void SetDirection(Vector2 direction)
     {
         this.direction = direction;
     }
