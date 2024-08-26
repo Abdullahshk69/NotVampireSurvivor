@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int PlayerHealth {  get; private set; }
     public int PlayerRecovery { get; private set; }
     public int ProjectileAmount { get; private set; }
-    public Vector2 LookDirection { get; private set; }
+    public Vector2 LookDirection { get; set; }
 
     private void Start()
     {
