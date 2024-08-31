@@ -6,13 +6,10 @@ public class BasicGun : BaseWeapon
 {
     private float timer;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private float damage;
 
     private void Start()
     {
-        projectileCount = 1;
-        weaponDamage = 10;
-        weaponSpeed = 2f;
-
         timer = 0.0f;
     }
 
@@ -21,9 +18,19 @@ public class BasicGun : BaseWeapon
         timer += Time.deltaTime;
         if (timer >= weaponSpeed)
         {
-            GameObject projectiles = Instantiate(projectile, transform.position, Quaternion.identity);
-            projectile.GetComponent<BasicGunProjectile>().SetDirection(GameManager.instance.LookDirection);
+            StartCoroutine(Shoot());
+
             timer = 0.0f;
+        }
+    }
+
+    IEnumerator Shoot()
+    {
+        for (int i = 0; i < projectileCount; i++)
+        {
+            GameObject projectiles = Instantiate(projectile, transform.position, Quaternion.identity);
+            projectiles.GetComponent<BasicGunProjectile>().SetVariables(GameManager.instance.LookDirection, damage);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

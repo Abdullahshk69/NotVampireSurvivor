@@ -12,14 +12,18 @@ public class PlayerHealth : MonoBehaviour
         curHeatlh = maxHeatlh;
     }
 
-    public void OnHeal(float heal)
+    public void TakeHeal(float heal)
     {
         curHeatlh = Mathf.Clamp(curHeatlh + heal, 0, maxHeatlh);
     }
 
-    public void OnDamage(float damage)
+    public void TakeDamage(float damage)
     {
         curHeatlh -= damage;
+        if(curHeatlh<=0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public bool IsAlive()

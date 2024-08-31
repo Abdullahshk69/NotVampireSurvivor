@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
 {
-    protected int projectileCount;
-    protected int weaponDamage;
-    protected float weaponSpeed;
+    [SerializeField] protected int projectileCount;
+    [SerializeField] protected int weaponDamage;
+    [SerializeField] protected float weaponSpeed;
 }
