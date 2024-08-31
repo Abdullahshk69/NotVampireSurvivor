@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
         curHeatlh -= damage;
         if(curHeatlh<=0)
         {
-            Destroy(gameObject);
+            // Lose game
         }
     }
 
