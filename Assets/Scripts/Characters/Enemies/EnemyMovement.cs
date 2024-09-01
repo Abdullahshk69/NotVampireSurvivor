@@ -6,6 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
     Transform playerPosition;
     [SerializeField] float moveSpeed;
+    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] Rigidbody2D rb;
 
     private void Start()
     {
@@ -14,6 +16,20 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerPosition.position, Time.deltaTime * moveSpeed);
+        if (transform.position.x < playerPosition.position.x)
+        {
+            sprite.flipX = true;
+        }
+        else
+        {
+            sprite.flipX = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 direction = playerPosition.position - transform.position;
+
+        rb.velocity = direction.normalized * moveSpeed;
     }
 }

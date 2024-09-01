@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public abstract class AbstractUpgrade : MonoBehaviour
+{
+    [SerializeField] protected int upgradeCost;
+    [SerializeField] protected float increaseStat;
+
+    public void PurchaseUpgrade()
+    {
+        if(GameManager.instance.Money < upgradeCost)
+        {
+            Debug.Log("Low on money BOOO");
+            return;
+        }
+
+        GameManager.instance.Money -= upgradeCost;
+        ApplyUpgrade();
+    }
+
+    virtual protected void ApplyUpgrade()
+    {
+
+    }
+}

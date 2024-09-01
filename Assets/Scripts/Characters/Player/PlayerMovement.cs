@@ -36,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
         {
             GameManager.instance.LookDirection = lookDirection;
             state = PlayerState.Move;
+            if(lookDirection.x == 0f)
+            {
+                return;
+            }
+
             if (lookDirection.x < 0f)
             {
                 sprite.flipX = true;

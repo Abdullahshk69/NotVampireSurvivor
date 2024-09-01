@@ -6,10 +6,14 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
     private float curHealth;
+    [SerializeField] float score;
 
-    private void Start()
+    IEnumerator Start()
     {
+        yield return null;
+        maxHealth *= GameManager.instance.EnemyDifficulty;
         curHealth = maxHealth;
+        score *= GameManager.instance.EnemyDifficulty;
     }
 
     public void TakeDamage(float damage)
@@ -19,5 +23,10 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.Score += (int)score;
     }
 }

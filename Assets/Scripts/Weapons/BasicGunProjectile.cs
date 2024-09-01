@@ -33,11 +33,9 @@ public class BasicGunProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision detected with tag: " + collision.gameObject.tag);
         if(collision.CompareTag("Enemy"))
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(damage);
-            GameManager.instance.Score++;
             penetrate--;
             if(penetrate <= 0)
             {

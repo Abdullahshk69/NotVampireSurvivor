@@ -4,30 +4,40 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private float maxHeatlh;
-    private float curHeatlh;
+    [field:SerializeField] public float maxHeatlh {  get; private set; }
+    public float CurHeatlh { get; private set; }
+    [SerializeField] private float healthRegen;
 
-    private void Awake()
+    IEnumerator Start()
     {
-        curHeatlh = maxHeatlh;
+        yield return null;
+        maxHeatlh += GameManager.instance.PlayerHealth;
+        CurHeatlh = maxHeatlh;
+        healthRegen += GameManager.instance.PlayerRecovery;
+    }
+
+    private void Update()
+    {
+        CurHeatlh = Mathf.Clamp(CurHeatlh + (healthRegen * Time.deltaTime), 0, maxHeatlh);
     }
 
     public void TakeHeal(float heal)
     {
-        curHeatlh = Mathf.Clamp(curHeatlh + heal, 0, maxHeatlh);
+        CurHeatlh = Mathf.Clamp(CurHeatlh + heal, 0, maxHeatlh);
     }
 
     public void TakeDamage(float damage)
     {
-        curHeatlh -= damage;
-        if(curHeatlh<=0)
+        CurHeatlh -= damage;
+        if(CurHeatlh<=0)
         {
             // Lose game
+            GameManager.instance.GameOver();
         }
     }
 
     public bool IsAlive()
     {
-        return curHeatlh > 0;
+        return CurHeatlh > 0;
     }
 }

@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage * Time.deltaTime);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage * Time.deltaTime * GameManager.instance.EnemyDifficulty);
         }
     }
 }
