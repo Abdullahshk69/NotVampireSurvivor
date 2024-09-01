@@ -7,7 +7,7 @@ public class ShowMoneyUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI moneyTxt;
 
-    private void Start()
+    private void Awake()
     {
         moneyTxt.text = $"{GameManager.instance.Money}";
     }

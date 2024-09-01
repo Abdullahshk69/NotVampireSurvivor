@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerRecoveryUpgrade : AbstractUpgrade
 {
+    private void Start()
+    {
+        OnStart();
+    }
+
     protected override void ApplyUpgrade()
     {
         GameManager.instance.PlayerRecovery += increaseStat;

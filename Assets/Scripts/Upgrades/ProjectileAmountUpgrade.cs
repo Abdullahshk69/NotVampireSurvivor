@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ProjectileAmountUpgrade : AbstractUpgrade
 {
+    private void Start()
+    {
+        OnStart();
+    }
+
     protected override void ApplyUpgrade()
     {
         GameManager.instance.ProjectileAmount += (int)increaseStat;

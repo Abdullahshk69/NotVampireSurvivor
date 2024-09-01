@@ -5,33 +5,28 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject gameplayUI;
-    [SerializeField] private GameObject checkpointUI;
     [SerializeField] private GameObject shopUI;
 
     private void Start()
     {
-        gameplayUI.SetActive(true);
-        checkpointUI.SetActive(false);
+        gameplayUI.SetActive(false);
         shopUI.SetActive(false);
     }
 
-    void EnterCheckpoint()
+    public void OpenShop()
     {
         gameplayUI.SetActive(false);
-        checkpointUI.SetActive(true);
+        shopUI.SetActive(true);
     }
 
-    void ExitCheckpoint()
+    public void CloseShop()
+    {
+        shopUI.SetActive(false);
+    }
+
+    public void ActiveGameplayUI()
     {
         gameplayUI.SetActive(true);
-        checkpointUI.SetActive(false);
-    }
-
-    void ReachGoal()
-    {
-        gameplayUI.SetActive(false);
-        checkpointUI.SetActive(true);
-        Transform continueButton = checkpointUI.transform.Find("ContinueButton");
-        continueButton.gameObject.SetActive(false);
+        shopUI.SetActive(false);
     }
 }
