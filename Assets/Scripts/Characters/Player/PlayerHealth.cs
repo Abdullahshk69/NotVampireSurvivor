@@ -14,11 +14,17 @@ public class PlayerHealth : MonoBehaviour
         maxHeatlh += GameManager.instance.PlayerHealth;
         CurHeatlh = maxHeatlh;
         healthRegen += GameManager.instance.PlayerRecovery;
+        GameManager.instance.playerRevive += PlayerRevived;
     }
 
     private void Update()
     {
         CurHeatlh = Mathf.Clamp(CurHeatlh + (healthRegen * Time.deltaTime), 0, maxHeatlh);
+    }
+
+    private void PlayerRevived()
+    {
+        CurHeatlh = maxHeatlh;
     }
 
     public void TakeHeal(float heal)

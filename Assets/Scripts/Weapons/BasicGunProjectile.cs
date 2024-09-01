@@ -13,6 +13,7 @@ public class BasicGunProjectile : MonoBehaviour
     private void Start()
     {
         penetrate += GameManager.instance.PlayerPenetration;
+        GameManager.instance.playerRevive += DestroyBullet;
     }
 
     private void FixedUpdate()
@@ -39,8 +40,18 @@ public class BasicGunProjectile : MonoBehaviour
             penetrate--;
             if(penetrate <= 0)
             {
-                Destroy(gameObject);
+                DestroyBullet();
             }
         }
+    }
+
+    private void DestroyBullet()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.playerRevive -= DestroyBullet;
     }
 }

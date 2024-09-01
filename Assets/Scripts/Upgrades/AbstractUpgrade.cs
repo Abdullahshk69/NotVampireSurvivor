@@ -23,7 +23,7 @@ public abstract class AbstractUpgrade : MonoBehaviour
             return;
         }
 
-        GameManager.instance.Money -= upgradeCost;
+        GameManager.instance.SubtractMoney(upgradeCost);
         ApplyUpgrade();
     }
 

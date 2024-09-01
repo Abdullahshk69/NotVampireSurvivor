@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
         maxHealth *= GameManager.instance.EnemyDifficulty;
         curHealth = maxHealth;
         score *= GameManager.instance.EnemyDifficulty;
+        GameManager.instance.playerRevive += Die;
     }
 
     public void TakeDamage(float damage)
@@ -21,12 +22,24 @@ public class EnemyHealth : MonoBehaviour
         curHealth -= damage;
         if(curHealth <= 0 )
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        StartCoroutine(DieNextFrame());
+    }
+
+    IEnumerator DieNextFrame()
+    {
+        yield return null;
+        Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        GameManager.instance.Score += (int)score;
+        GameManager.instance.playerRevive -= Die;
+        GameManager.instance.AddScore((int)score);
     }
 }
